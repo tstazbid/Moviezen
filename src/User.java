@@ -46,4 +46,8 @@ public class User {
     public void addToFavorites(Movie movie) {
         favorites.add(movie);
     }
+
+    public int getTotalFavoriteMovies() {
+        return favorites.size();
+    }
 }

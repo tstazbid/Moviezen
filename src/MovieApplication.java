@@ -79,24 +79,10 @@ public class MovieApplication {
                     searchMovies(user, false);
                     break;
                 case 2:
-                    System.out.println("\nPersonal Details:");
-                    System.out.println("Name: " + user.getName());
-                    System.out.println("Email: " + user.getEmail());
-                    System.out.println("Username: " + user.getUsername());
+                    showPersonalDetails(user);
                     break;
                 case 3:
-                    List<Movie> favorites = user.getFavorites();
-                    if (favorites.isEmpty()) {
-                        System.out.println("\nYour favorites list is empty.");
-                    } else {
-                        System.out.println("\nYour Favorites List:");
-                        for (int i = 0; i < favorites.size(); i++) {
-                            Movie movie = favorites.get(i);
-                            System.out.println((i + 1) + ". " + movie.getTitle());
-                            // System.out.println("   Cast: " + String.join(", ", movie.getCast()));
-                            System.out.println("   Category: " + movie.getCategory());
-                        }
-                    }
+                    showFavoritesList(user);
                     break;
                 case 4:
                     searchFavoritesMovies(user);
@@ -244,5 +230,33 @@ public class MovieApplication {
         }
         System.out.println("\nSearching from favorite list ...");
         searchMovies(user, true);
+    }
+
+    private void showPersonalDetails(User user) {
+        System.out.println("\nPersonal Details:");
+        System.out.println("Name: " + user.getName());
+        System.out.println("Email: " + user.getEmail());
+        System.out.println("Username: " + user.getUsername());
+        int totalFavoriteMovies = user.getTotalFavoriteMovies();
+        if (totalFavoriteMovies == 0) {
+            System.out.println("You haven't added any favorite movies yet.");
+        } else {
+            System.out.println("Current favorite: " + totalFavoriteMovies + " movies");
+        }
+    }
+
+    private void showFavoritesList(User user) {
+        List<Movie> favorites = user.getFavorites();
+        if (favorites.isEmpty()) {
+            System.out.println("\nYour favorites list is empty.");
+        } else {
+            System.out.println("\nYour Favorites List:");
+            for (int i = 0; i < favorites.size(); i++) {
+                Movie movie = favorites.get(i);
+                System.out.println((i + 1) + ". " + movie.getTitle());
+                System.out.println("   Cast: " + String.join(", ", movie.getCast()));
+                System.out.println("   Category: " + movie.getCategory());
+            }
+        }
     }
 }
